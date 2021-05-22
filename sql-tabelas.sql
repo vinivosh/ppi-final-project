@@ -1,22 +1,56 @@
-CREATE TABLE cliente
+CREATE TABLE pessoatrabfinal
 (
-   id int PRIMARY KEY auto_increment,
+   codigo int PRIMARY KEY auto_increment,
    nome varchar(50),
-   cpf char(14) UNIQUE,
+   sexo varchar(1),
    email varchar(50) UNIQUE,
-   hash_senha varchar(255),
-   data_nascimento date,
-   estado_civil varchar(30),
-   altura int
+   telefone bigint,
+   cep bigint,
+   logradouro varchar(50),
+   cidade varchar(50),
+   estado varchar(50)
 ) ENGINE=InnoDB;
 
-CREATE TABLE endereco_entrega
+CREATE TABLE pacientetrabfinal
 (
-   id int PRIMARY KEY auto_increment,
-   cep char(10),
-   endereco varchar(100),
-   bairro varchar(50),
-   cidade varchar(50),
-   id_cliente int not null,
-   FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON DELETE CASCADE
+   codigo int UNIQUE,
+   peso decimal,
+   altura decimal,
+   tiposanguineo varchar(3),
+   FOREIGN KEY (codigo) REFERENCES pessoatrabfinal(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+
+CREATE TABLE funcionariotrabfinal
+(
+   codigo int UNIQUE,
+   datacontrato date,
+   salario decimal,
+   hash_senha varchar(255),
+   FOREIGN KEY (codigo) REFERENCES pessoatrabfinal(codigo) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+
+CREATE TABLE medicotrabfinal
+(
+   codigo int UNIQUE,
+   especialidade varchar(50),
+   crm bigint UNIQUE,
+   FOREIGN KEY (codigo) REFERENCES funcionariotrabfinal(codigo) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+
+CREATE TABLE agendatrabfinal
+(
+   codigo int PRIMARY KEY auto_increment
+   dataconsulta date,
+   horario time,
+   nome varchar(50),
+   sexo varchar(1),
+   email varchar(50),
+   codigomedico int,
+   FOREIGN KEY (codigomedico) REFERENCES medicotrabfinal(codigo) ON DELETE CASCADE
+) ENGINE=InnoDB;
+

@@ -54,3 +54,10 @@ CREATE TABLE agendatrabfinal
    FOREIGN KEY (codigomedico) REFERENCES medicotrabfinal(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+CREATE TABLE enderecosajaxtrabfinal(
+	cep bigint PRIMARY KEY,
+	logradouro varchar(50),
+	cidade varchar(50),
+	estado varchar(50)
+)
+

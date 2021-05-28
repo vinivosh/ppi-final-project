@@ -1,63 +1,62 @@
-CREATE TABLE pessoatrabfinal
+CREATE TABLE TF_pessoa
 (
    codigo int PRIMARY KEY auto_increment,
-   nome varchar(50),
-   sexo varchar(1),
-   email varchar(50) UNIQUE,
-   telefone bigint,
-   cep bigint,
-   logradouro varchar(50),
-   cidade varchar(50),
-   estado varchar(50)
+   nome varchar(100),
+   sexo char(1),
+   email varchar(100) UNIQUE,
+   telefone varchar(14),
+   cep char(9),
+   logradouro varchar(100),
+   cidade varchar(100),
+   estado varchar(100)
 ) ENGINE=InnoDB;
 
-CREATE TABLE pacientetrabfinal
+CREATE TABLE TF_paciente
 (
    codigo int UNIQUE,
    peso decimal,
    altura decimal,
    tiposanguineo varchar(3),
-   FOREIGN KEY (codigo) REFERENCES pessoatrabfinal(codigo) ON DELETE CASCADE
+   FOREIGN KEY (codigo) REFERENCES TF_pessoa(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
-CREATE TABLE funcionariotrabfinal
+CREATE TABLE TF_funcionario
 (
    codigo int UNIQUE,
    datacontrato date,
    salario decimal,
    hash_senha varchar(255),
-   FOREIGN KEY (codigo) REFERENCES pessoatrabfinal(codigo) ON DELETE CASCADE
+   FOREIGN KEY (codigo) REFERENCES TF_pessoa(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
 
-CREATE TABLE medicotrabfinal
+CREATE TABLE TF_medico
 (
    codigo int UNIQUE,
-   especialidade varchar(50),
-   crm bigint UNIQUE,
-   FOREIGN KEY (codigo) REFERENCES funcionariotrabfinal(codigo) ON DELETE CASCADE
+   especialidade varchar(100),
+   crm varchar(30) UNIQUE,
+   FOREIGN KEY (codigo) REFERENCES TF_funcionario(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
 
-CREATE TABLE agendatrabfinal
+CREATE TABLE TF_agenda
 (
    codigo int PRIMARY KEY auto_increment
    dataconsulta date,
    horario time,
-   nome varchar(50),
-   sexo varchar(1),
-   email varchar(50),
+   nome varchar(100),
+   sexo char(1),
+   email varchar(100),
    codigomedico int,
-   FOREIGN KEY (codigomedico) REFERENCES medicotrabfinal(codigo) ON DELETE CASCADE
+   FOREIGN KEY (codigomedico) REFERENCES TF_medico(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE enderecosajaxtrabfinal(
-	cep bigint PRIMARY KEY,
-	logradouro varchar(50),
-	cidade varchar(50),
+CREATE TABLE TF_endereco_aux(
+	cep varchar(9) PRIMARY KEY,
+	logradouro varchar(100),
+	cidade varchar(100),
 	estado varchar(50)
 )
-

@@ -1,7 +1,7 @@
 <?php
     require "conexaoMysql.php";
-    $pdo = mysqlConnect();
-
+    require "autenticacao.php";
+    session_start();
     class RequestResponse{
         public $success;
         public $destination;
@@ -11,55 +11,77 @@
             $this->destination = $destination;
         }
     }
+
+    $email = $_POST['inputEmail'] ?? '';
+    $senha = $_POST['inputSenha'] ?? '';
+
+    $pdo = mysqlConnect();
+    $respostaAutenticacao = checkPassword($pdo, $email, $senha);
     
-    if (isset($_POST["inputEmail"]) and $_POST["inputEmail"] !== "" and isset($_POST["inputSenha"]) and $_POST["inputSenha"] !== ""){
+    if ($respostaAutenticacao->hash_senha != null) {
+        // Armazena dados úteis para confirmação de login em outros scripts PHP
+        $_SESSION['emailUsuario'] = $email;
+        $_SESSION['tipoDeUsuario'] = $respostaAutenticacao->$tipoDeUsuario;
+        $_SESSION['loginString'] = hash('sha256', $respostaAutenticacao->$hash_senha . $_SERVER['HTTP_USER_AGENT']);  
+        $response = new RequestResponse(true, './restrito');
+    }else{        
+        // echo "erro";
+        $response = new RequestResponse(false, null); 
+    }
 
-        try{
-            $sql = <<<SQL
-            SELECT codigo
-            FROM TF_pessoa
-            WHERE email = ?
-            SQL;
+    echo json_encode($response);      
+
+    // if ()
+
+
+    // if (isset($_POST["inputEmail"]) and $_POST["inputEmail"] !== "" and isset($_POST["inputSenha"]) and $_POST["inputSenha"] !== ""){
+
+    //     try{
+    //         $sql = <<<SQL
+    //         SELECT codigo
+    //         FROM TF_pessoa
+    //         WHERE email = ?
+    //         SQL;
         
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$_POST["inputEmail"]]);
-        }catch(Exception $e){
-            exit('Ocorreu uma falha: ' . $e->getMessage());
-        }
+    //         $stmt = $pdo->prepare($sql);
+    //         $stmt->execute([$_POST["inputEmail"]]);
+    //     }catch(Exception $e){
+    //         exit('Ocorreu uma falha: ' . $e->getMessage());
+    //     }
 
-        $row = $stmt->fetch();
-        $emailSaved = $row['email'];
-        $codigo = $row["codigo"];
+    //     $row = $stmt->fetch();
+    //     $emailSaved = $row['email'];
+    //     $codigo = $row["codigo"];
 
-        if ($emailSaved === null){
-            $reqResponse = new RequestResponse(false, NULL);
-        }else{
-            $sql = <<<SQL
-            SELECT hash_senha
-            FROM TF_funcionario
-            WHERE codigo = ?
-            SQL;
+    //     if ($emailSaved === null){
+    //         $reqResponse = new RequestResponse(false, NULL);
+    //     }else{
+    //         $sql = <<<SQL
+    //         SELECT hash_senha
+    //         FROM TF_funcionario
+    //         WHERE codigo = ?
+    //         SQL;
 
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$codigo]);
+    //         $stmt = $pdo->prepare($sql);
+    //         $stmt->execute([$codigo]);
            
-            $row = $stmt->fetch();
+    //         $row = $stmt->fetch();
 
-            $hash_senha = $row['hash_senha'];
+    //         $hash_senha = $row['hash_senha'];
 
-            if ($_POST["inputEmail"] === $emailSaved and password_verify($_POST["inputSenha"], $hash_senha)){
-                $reqResponse = new RequestResponse(true, "./restrito");
-            }else {
-                $reqResponse = new RequestResponse(false, NULL);
-            }    
-        }
+    //         if ($_POST["inputEmail"] === $emailSaved and password_verify($_POST["inputSenha"], $hash_senha)){
+    //             $reqResponse = new RequestResponse(true, "./restrito");
+    //         }else {
+    //             $reqResponse = new RequestResponse(false, NULL);
+    //         }    
+    //     }
 
-        echo json_encode($reqResponse);
+    //     echo json_encode($reqResponse);
 
-        } else {
-            header("Location: login.html");
-            exit();
-        }
+    //     } else {
+    //         header("Location: login.html");
+    //         exit();
+    //     }
         
     
 ?>

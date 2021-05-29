@@ -1,8 +1,8 @@
 <?php
 
 class RespostaAutenticacao{
-  public $tipoDeUsuario = '';
-  public $hash_senha = '';
+  public $tipoDeUsuario;
+  public $hash_senha;
 
   function __construct($tipoDeUsuario, $hash_senha){
     $this->tipoDeUsuario = $tipoDeUsuario;
@@ -42,6 +42,7 @@ function checkPassword($pdo, $email, $senha)
       $hash_senha = $stmt->fetchColumn();
 
       if (password_verify($senha, $hash_senha)){  // Se a senha bater com o hash…
+
         $sql = <<<SQL
         SELECT 1
         FROM TF_medico

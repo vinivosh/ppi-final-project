@@ -21,9 +21,9 @@
     if ($respostaAutenticacao->hash_senha != null) {
         // Armazena dados úteis para confirmação de login em outros scripts PHP
         $_SESSION['emailUsuario'] = $email;
-        $_SESSION['tipoDeUsuario'] = $respostaAutenticacao->$tipoDeUsuario;
-        $_SESSION['loginString'] = hash('sha256', $respostaAutenticacao->$hash_senha . $_SERVER['HTTP_USER_AGENT']);  
-        $response = new RequestResponse(true, './restrito');
+        $_SESSION['tipoDeUsuario'] = $respostaAutenticacao->tipoDeUsuario;
+        $_SESSION['loginString'] = hash('sha512', $respostaAutenticacao->hash_senha . $_SERVER['HTTP_USER_AGENT']);  
+        $response = new RequestResponse(true, 'index.php');
     }else{        
         // echo "erro";
         $response = new RequestResponse(false, null); 

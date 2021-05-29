@@ -7,17 +7,20 @@
 
 function mysqlConnect()
 {
-  $db_host = "fdb29.awardspace.net";
-  $db_username = "3797923_mysqltestdb";
+  // $db_host = "fdb29.awardspace.net";
+  // $db_username = "3797923_mysqltestdb";
+  $db_host = "127.0.0.1";
+  $db_username = "root";
   try{
     // A senha é recuperada em um arquivo separado pois estou publicando esse código no meu GitHub, e talvez não fosse a melhor ideia deixar a senha explícita aqui no código.
-    $db_password = file_get_contents("./sql-password.txt");
+    // $db_password = file_get_contents("./sql-password.txt");
+    $db_password = '';
     // echo "[DEBUG] Senha encontrada: $db_password";
   } catch (Exception $e){
     //error_log($e->getMessage(), 3, 'log.php');
     exit('Ocorreu uma falha na conexão com o BD: ' . $e->getMessage());
   }
-  $db_name = "3797923_mysqltestdb";
+  $db_name = "trabalhoFinal";
 
   // dsn é apenas um acrônimo de database source name
   $dsn = "mysql:host=$db_host;dbname=$db_name;charset=utf8mb4";

@@ -104,10 +104,13 @@ function checkLogged($pdo)
 
       $hash_senha = $stmt->fetchColumn();
 
-      if(!$hash_senha){
+      if($hash_senha == null) {
+        // echo json_encode('Testando função checkLogged: ' . $hash_senha);
         return false; // Não existe funcionário
       }else{
+        // echo json_encode('Testando função checkLogged: ' . $hash_senha);
         $loginStringCheck = hash('sha512', $hash_senha . $_SERVER['HTTP_USER_AGENT']);
+        // echo json_encode('loginStringCheck: ' . hash_equals($loginStringCheck, $_SESSION['loginString']));
         if (!hash_equals($loginStringCheck, $_SESSION['loginString']))
           return false;
 
@@ -123,7 +126,7 @@ function checkLogged($pdo)
 function exitWhenNotLogged($pdo)
 {
   if (!checkLogged($pdo)) {
-    header("Location: index.html");
+    header("Location: /index.html");
     exit();
   }
 }

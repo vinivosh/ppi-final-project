@@ -58,6 +58,6 @@ h2,h3{
     margin-right: auto;
 }
 
-#loginFailMsg,.apenasMedi{
+#loginFailMsg,.apenasFunc,.apenasMedi{
     display: none;
 }

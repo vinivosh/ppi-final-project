@@ -44,7 +44,7 @@ CREATE TABLE TF_medico
 
 CREATE TABLE TF_agenda
 (
-   codigo int PRIMARY KEY auto_increment
+   codigo int PRIMARY KEY auto_increment,
    dataconsulta date,
    horario time,
    nome varchar(100),

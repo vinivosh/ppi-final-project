@@ -1,0 +1,63 @@
+header{
+    text-align: center;
+    background-color:rgb(7, 7, 7) !important;
+    color: chartreuse !important;
+}
+
+nav{
+    width: 100%;
+    
+    text-align: center;
+    background-color: rgb(1, 27, 2) !important;
+    color:white !important;
+    position: sticky;
+    top:0;
+}
+
+nav li{
+    display: inline;
+}
+
+a{
+    color:rgb(29, 175, 107)  !important;
+    font-size: 15pt !important;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial !important;
+    line-height: 2rem;
+    text-align: left;
+    background-color:rgb(123, 134, 123) !important;
+    font-size: 16pt !important;
+}   
+
+main{
+    position: absolute;
+    left:50%;
+    transform: translate(-50%,0%);
+}
+
+table{
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+h1{
+    text-align: center;
+    font-size: 4rem !important;
+}
+
+h2,h3{
+    text-align: center;
+    font-size: 2rem !important;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#loginFailMsg,.apenasMedi{
+    display: none;
+}

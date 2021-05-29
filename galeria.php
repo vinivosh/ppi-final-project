@@ -1,41 +1,23 @@
+<?php
+
+require_once "conexaoMysql.php";
+require_once "autenticacao.php";
+require_once "scriptsAux/navbarHTML.php";
+session_start();
+$pdo = mysqlConnect();
+$isLogged = checkLogged($pdo);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset ="UTF-8">
     <title> Galeria</title>
     <meta name="description" content="Adib Cecilio Prado Domingos e o autor">
-    <style>
-        header{
-            text-align: center;
-            background-color:rgb(7, 7, 7);
-            padding: 1pt;
-            color: chartreuse;
-            font-size: 20pt;
-    }
+    <link rel="stylesheet" href="mainStyle.css">
+     <!-- <style>
 
-        nav{
-            width: 100%;
-            
-            text-align: center;
-            background-color: rgb(1, 27, 2);
-            padding: 1px;
-            color:white;
-            position: sticky;
-            top:0;
-        }
-        nav li{display: inline;}
-        a{color:rgb(29, 175, 107); font-size: 15pt; padding-right: 20pt;}
-        body{
-            font-family: "Helvetica Neue", Arial;
-            line-height: 2rem;
-            text-align: left;
-            padding: 1px;
-            background-color:rgb(123, 134, 123);
-            font-size: 13pt;
-
-        }   
         table{ margin-left: auto;  margin-right: auto;}
-        h1,h2,h3{text-align: center;}
         img{
 			width: 225pt;
 			height: 150pt;
@@ -49,23 +31,14 @@
 		 left:50%;
 		 transform: translate(-50%,0%);
          border-radius: 15pt; 
-		 line-height: 20pt;}
 
-</style>
+</style>  -->
 </head>
 
 <body>
-    <header><h1>Site do Adib</h1></header>
-
-    <nav>
-    <h2>Menu de navegação</h2>
-    <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="galeria.html">Galeria</a></li>
-        <li><a href="contato.html">Contato</a></li>
-    </ul>
-    </nav>
-    <hr>
+    <header><h1>Site do Adib</h1>
+        <?php echo navbar()?> <!-- Navbar completa -->
+    </header>
     <main>
         <h2> Galeria de Fotos</h2>
         <hr>
@@ -92,4 +65,13 @@
             </div>
         </div>
     </main>
+
+    <script type="module">
+         console.log("entrou no js")
+         import {navbarDin} from "./scriptsAux/navbarDinamica.js"
+         window.onload = () => {
+             console.log("entrou no onload")
+             navbarDin("<?php echo json_encode($isLogged); ?>","<?php echo $_SESSION['tipoDeUsuario']; ?>")
+        }
+    </script>
 </body>

@@ -1,3 +1,7 @@
+<?php
+require_once "scriptsAux/navbarHTML.php";
+?>
+
 <!doctype html>
 <html lang="pt-BR">
   <head>
@@ -14,19 +18,9 @@
   </head>
   
   <body>
-    <header><h1>Clinica dos Lolzeiros</h1></header>
-
-    <nav>
-        <h2>Menu de navegação</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="galeria.html">Galeria</a></li>
-            <li><a href="contato.html">Contato</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
-    <hr>
-
+    <header><h1>Clinica dos Lolzeiros</h1>
+      <?php echo navbar()?> <!-- Navbar completa -->
+    </header>
     <div class="container my-3">
 
         <main>
@@ -67,8 +61,12 @@
         
     </div>
 
-    <script>
+    <script type="module">
+      import {navbarDin} from "./scriptsAux/navbarDinamica.js"
       window.onload = () => {
+        console.log("entrou no onload")
+        navbarDin("<?php echo json_encode($isLogged); ?>","<?php echo $_SESSION['tipoDeUsuario']; ?>")
+        
         const btnSignUp = document.getElementById('signUpBtn')
         btnSignUp.addEventListener('click', (event) =>{
           event.preventDefault()

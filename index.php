@@ -2,20 +2,12 @@
 
 require_once "conexaoMysql.php";
 require_once "autenticacao.php";
-
+require_once "scriptsAux/navbarHTML.php";
 session_start();
 $pdo = mysqlConnect();
 $isLogged = checkLogged($pdo);
-
-// echo json_encode($isLogged);
-// echo json_encode($_SESSION['emailUsuario']);
-// echo json_encode($_SESSION['tipoDeUsuario']);
-// echo json_encode($_SESSION['loginString']);
-
-
-// $_SESSION['tipoDeUsuario']
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,28 +23,9 @@ $isLogged = checkLogged($pdo);
 </head>
 
 <body>
-    <header><h1 class="mb-0">Clinica dos Lolzeiros</h1></header>
-
-    <nav>
-        <h2>Menu de navegação</h2>
-        <ul>
-            <li><a href="/index.php">Inicio</a></li>
-            <li><a href="/galeria.php">Galeria</a></li>
-            <li><a href="/novoEndereco.php">Novo Endereço</a></li>
-            <li><a href="/login.php">Login</a></li>
-            <li><a href="/agendarConsulta.php">Agendar Consulta</a></li><br>
-
-            <li class="apenasFunc"><a href="/restrito/cadastroFunc.php">Cadastrar Funcionários</a></li>
-            <li class="apenasFunc"><a href="/restrito/cadastroPaci.php">Cadastrar Pacientes</a></li>
-            <li class="apenasFunc"><a href="/restrito/listarFunc.php">Listar Funcionários</a></li>
-            <li class="apenasFunc"><a href="/restrito/listarPaci.php">Listar Pacientes</a></li>
-            <li class="apenasFunc"><a href="/restrito/listarEnde.php">Listar Endereços</a></li>
-            <li class="apenasFunc"><a href="/restrito/listarCons.php">Listar Consultas</a></li>
-            <li class="apenasMedi"><a href="/restrito/listarMinh.php">Minhas Consultas</a></li>
-        </ul>
-    </nav>
-    <hr>
-    
+    <header><h1 class="mb-0">Clinica dos Lolzeiros</h1>
+       <?php echo navbar()?> <!-- Navbar completa -->
+    </header>
     <main>  
         <div class="container">
             <article>
@@ -80,25 +53,12 @@ $isLogged = checkLogged($pdo);
         </div>
     </main> 
 
-    <script type="text/javascript">
-        window.onload = () => {
-            let isLogged = "<?php echo json_encode($isLogged); ?>"
-            // console.log('Está logado? ' + isLogged)
-            // console.log("<?php echo $_SESSION['tipoDeUsuario']; ?>")
-
-            // Modifica a navbar de acordo com o tipo de usuário logado
-            if (isLogged){                
-                if ("<?php echo $_SESSION['tipoDeUsuario']; ?>" == 'medico'){
-                    let apenasMedi = document.querySelectorAll('.apenasMedi')
-                    apenasMedi.forEach((item) => item.style.display = 'inline')
-                    apenasMedi = document.querySelectorAll('.apenasFunc')
-                    apenasMedi.forEach((item) => item.style.display = 'inline')
-                    
-                }else if ("<?php echo $_SESSION['tipoDeUsuario']; ?>" == 'funcionario'){
-                    let apenasFunc = document.querySelectorAll('.apenasFunc')
-                    apenasFunc.forEach((item) => item.style.display = 'inline')
-                }
-            }
+    <script type="module">
+         console.log("entrou no js")
+         import {navbarDin} from "./scriptsAux/navbarDinamica.js"
+         window.onload = () => {
+             console.log("entrou no onload")
+             navbarDin("<?php echo json_encode($isLogged); ?>","<?php echo $_SESSION['tipoDeUsuario']; ?>")
         }
     </script>
 </body>

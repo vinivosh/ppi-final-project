@@ -1,3 +1,13 @@
+<?php
+
+require_once "conexaoMysql.php";
+require_once "autenticacao.php";
+require_once "scriptsAux/navbarHTML.php";
+session_start();
+$pdo = mysqlConnect();
+$isLogged = checkLogged($pdo);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -60,17 +70,9 @@
 </head>
 
 <body>
-    <header><h1>Site do Adib</h1></header>
-
-    <nav>
-    <h2>Menu de navegação</h2>
-    <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="galeria.html">Galeria</a></li>
-        <li><a href="contato.html">Contato</a></li>
-    </ul>
-    </nav>
-    <hr>
+    <header><h1>Site do Adib</h1>
+     <?php echo navbar()?> <!-- Navbar completa -->
+    </header>
     <main>
         <h2>Formulario</h2>
         <hr>
@@ -148,4 +150,13 @@
             <input type="reset" value="Limpar">
         </form>    
     </main>
+
+    <script type="module">
+         console.log("entrou no js")
+         import {navbarDin} from "./scriptsAux/navbarDinamica.js"
+         window.onload = () => {
+             console.log("entrou no onload")
+             navbarDin("<?php echo json_encode($isLogged); ?>","<?php echo $_SESSION['tipoDeUsuario']; ?>")
+        }
+    </script>
 </body>

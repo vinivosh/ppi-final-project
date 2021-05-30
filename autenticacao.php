@@ -125,7 +125,7 @@ function checkLogged($pdo)
 function exitWhenNotLogged($pdo)
 {
   if (!checkLogged($pdo)) {
-    header("Location: /index.html");
+    header("Location: http://vinivosh.atwebpages.com/trabalhoFinal/index.php");
     exit();
   }
 }

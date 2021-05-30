@@ -3,14 +3,13 @@
 require_once "conexaoMysql.php";
 require_once "autenticacao.php";
 require_once "scriptsAux/navbarHTML.php";
+
 session_start();
 $pdo = mysqlConnect();
 $isLogged = checkLogged($pdo);
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  require "conexaoMysql.php";
-  $pdo = mysqlConnect();
   $cep = $logradouro = $cidade = $estado = "";
   if(isset($_POST["cep"]))
     $cep = $_POST["cep"];
@@ -35,14 +34,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     exit();
   } 
-  catch (Exception $e) { 
-    if ($e->errorInfo[1] === 1062)
-      exit('Dados duplicados: ' . $e->getMessage());
+  catch (Exception $e) {
+    header("Location: cadastrarEndereco.php?sucesso=false");
+    if ($e->errorInfo[1] === 1062)   
+      exit('Dados duplicados: ' . $e->getMessage());  
     else
       exit('Falha ao cadastrar os dados: ' . $e->getMessage());
   }
   }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -86,8 +87,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
 					<path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
 				  </svg>
-				Enviar</button></div>		
-            
+				Enviar</button></div>
+
+        <div class="col-md-12 mt-3 alert alert-success" role="alert" id="cadastroSuccessMsg">
+          Endereço adicionado com sucesso!
+        </div>
+
+        <div class="col-md-12 mt-3 alert alert-danger" role="alert" id="cadastroFailMsg">
+          Erro no cadastro…
+        </div>            
 		</div>	
 
 	</form>
@@ -99,8 +107,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          console.log("entrou no js")
          import {navbarDin} from "./scriptsAux/navbarDinamica.js"
          window.onload = () => {
-             console.log("entrou no onload")
              navbarDin("<?php echo json_encode($isLogged); ?>","<?php echo $_SESSION['tipoDeUsuario']; ?>")
+
+            const sucesso = '<?php echo $_GET["sucesso"] ?>'
+
+            const successoMsg = document.getElementById('cadastroSuccessMsg')
+            const failMsg = document.getElementById('cadastroFailMsg')
+
+             if (sucesso == 'true'){
+                successoMsg.style.display = 'block';
+                failMsg.style.display = 'none'
+              }else if (sucesso == 'false'){
+                successoMsg.style.display = 'none';
+                failMsg.style.display = 'block'
+              }else{
+                failMsg.style.display = 'none'
+                successoMsg.style.display = 'none';
+              }
         }
     </script>
 </html>

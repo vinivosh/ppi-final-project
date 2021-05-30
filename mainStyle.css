@@ -62,6 +62,6 @@ h2,h3{
     display: none;
 }
 
-/* .apenasLoggedOff{
-    display: inline;
-} */
+#cadastroSuccessMsg,#cadastroFailMsg{
+    display: none;
+}

@@ -58,10 +58,6 @@ h2,h3{
     margin-right: auto;
 }
 
-#loginFailMsg,.apenasFunc,.apenasMedi{
-    display: none;
-}
-
-#cadastroSuccessMsg,#cadastroFailMsg{
+#loginFailMsg,.apenasFunc,.apenasMedi,#cadastroSuccessMsg,#cadastroFailMsg,.apenasCheckboxMed{
     display: none;
 }

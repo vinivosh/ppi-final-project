@@ -29,7 +29,7 @@ $isLogged = checkLogged($pdo);
     </header>
 
     <main>
-        <form class="row g-2">
+        <form class="row g-2" action="processFunc.php">
             <!-- Nome -->
             <div class="col-md-9 form-floating">
                 <input type="text" class="form-control" placeholder="" id="nome" name="nome">
@@ -37,8 +37,8 @@ $isLogged = checkLogged($pdo);
             </div>
 
             <!-- Sexo -->
-            <div class="col-md-2 form-floating">
-            <select type="text" class="form-select" placeholder="" id="sexo">
+            <div class="col-md-3 form-floating">
+            <select type="text" class="form-select" placeholder="" name="sexo" id="sexo">
                 <option selected>—</option>
                 <option value="M">Masculino</option><option value="F">Feminino</option>
             </select>
@@ -46,35 +46,35 @@ $isLogged = checkLogged($pdo);
             </div>
 
             <!-- E-mail -->
-            <div class="col-md-9 form-floating">
-                <input type="email" class="form-control" placeholder="" id="inputEmail">
+            <div class="col-md-12 form-floating">
+                <input type="email" class="form-control" placeholder="" name="email" id="inputEmail">
                 <label for="inputEmail"> E-mail </label>
             </div>
 
             <!-- Telefone -->
-            <div class="col-md-9 form-floating">
+            <div class="col-md-6 form-floating">
                 <input type="text" class="form-control" placeholder="" id="telefone" name="telefone">
-                <label for="telefone"> Telefone </label>
+                <label for="telefone"> Telefone (formato xx xxxxx-xxxx) </label>
             </div>
 
             <!-- CEP -->
-            <div class="col-md-2 form-floating">
-                <input type="text" class="form-control" placeholder="" id="cep">
-                <label for="cep"> CEP (formato xxxxx-xxx) </label>
+            <div class="col-md-6 form-floating">
+                <input type="text" class="form-control" placeholder="" name="cep" id="cep">
+                <label for="cep"> CEP (formato xxxxx-xxx)</label>
             </div>
 
             <!-- Logradouro, Cidade e Estado (select em um dropdown) -->
-            <div class="col-md-5 form-floating">
-                <input type="text" class="form-control" placeholder="" id="logradouro">
+            <div class="col-md-12 form-floating">
+                <input type="text" class="form-control" placeholder="" name="logradouro" id="logradouro">
                 <label for="logradouro"> Logradouro </label>
             </div>
-            <div class="col-md-5 form-floating">
-                <input type="text" class="form-control" placeholder="" id="cidade">
+            <div class="col-md-9 form-floating">
+                <input type="text" class="form-control" placeholder="" name="cidade" id="cidade">
                 <label for="cidade"> Cidade </label>
             </div>
-            <div class="col-md-2 form-floating">
-            <select type="text" class="form-select" placeholder="" id="estado">
-                <option selected>Sel.</option>
+            <div class="col-md-3 form-floating">
+            <select type="text" class="form-select" placeholder="" name="estado" id="estado">
+                <option selected>——</option>
                 <option>AC</option><option>AL</option><option>AP</option>
                 <option>AM</option><option>BA</option><option>CE</option>
                 <option>DF</option><option>ES</option><option>GO</option>
@@ -89,35 +89,21 @@ $isLogged = checkLogged($pdo);
             </div>
 
             <!-- Data de início do contrato -->
-            <div class="col-md-2 form-floating">
-                <input type="date" class="form-control" placeholder="" id="dataContrato">
+            <div class="col-md-4 form-floating">
+                <input type="date" class="form-control" placeholder="" name="dataContrato" id="dataContrato">
                 <label for="dataContrato"> Data de início do contrato </label>
             </div>
 
             <!-- Salário -->
-            <div class="col-md-2 form-floating">
-                <input type="number" class="form-control" placeholder="" id="salario">
+            <div class="col-md-4 form-floating">
+                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="salario" id="salario">
                 <label for="salario"> Salário </label>
             </div>
 
             <!-- Senha -->
-            <div class="col-md-3 form-floating">
-                <input type="password" class="form-control" placeholder="" id="senha">
+            <div class="col-md-4 form-floating">
+                <input type="password" class="form-control" placeholder="" name="senha" id="senha">
                 <label for="senha"> Senha </label>
-            </div>
-            
-            <!-- Partes que só aparecem se o usuário marcar que o funcionário é um médico -->
-
-            <!-- Especialidade -->
-            <div class="col-md-5 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" id="especialidade">
-                <label for="especialidade"> Especialidade </label>
-            </div>
-
-            <!-- CRM -->
-            <div class="col-md-5 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" id="crm">
-                <label for="crm"> crm </label>
             </div>
 
             <!-- Checkbox de médico -->
@@ -127,6 +113,20 @@ $isLogged = checkLogged($pdo);
                 <label for="medCheckbox"> Funcionário é um médico </label>
                 </div>
             </div>
+
+            <!-- Partes que só aparecem se o usuário marcar que o funcionário é um médico -->
+
+            <!-- Especialidade -->
+            <div class="col-md-6 form-floating apenasCheckboxMed">
+                <input type="text" class="form-control" placeholder="" name="especialidade" id="especialidade">
+                <label for="especialidade"> Especialidade </label>
+            </div>
+
+            <!-- CRM -->
+            <div class="col-md-6 form-floating apenasCheckboxMed">
+                <input type="text" class="form-control" placeholder="" name="crm" id="crm">
+                <label for="crm"> CRM </label>
+            </div>            
 
             <!-- Botão cadastrar -->
             <div class="col-md-12 form-floating">
@@ -149,9 +149,62 @@ $isLogged = checkLogged($pdo);
 
   <script type="module">
         import {navbarDin} from "../scriptsAux/navbarDinamica.js"
+
+        // Função que busca o endereço de acordo com o CEP digitado
+        function buscaEndereco(cep) {
+            if (cep.length != 9) return
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "buscaEndereco.php?cep=" + cep, true)
+
+            xhr.onload = function () {        
+                // verifica o código de status retornado pelo servidor
+                if (xhr.status != 200) {
+                    console.error("Falha inesperada: " + xhr.responseText)
+                    return
+                }
+
+                // converte a string JSON para objeto JavaScript
+                try {
+                    var endereco = JSON.parse(xhr.responseText)
+                }
+                catch (e) {
+                    console.error("String JSON inválida: " + xhr.responseText)
+                    return
+                }
+
+                // utiliza os dados retornados para preencher formulário
+                let form = document.querySelector("form")
+                form.logradouro.value = endereco.logradouro      
+                form.cidade.value = endereco.cidade
+                form.estado.value = endereco.estado
+            }
+
+            xhr.onerror = function () {
+                console.error("Erro de rede - requisição não finalizada")
+            }
+
+            xhr.send()
+        }
          
         window.onload = () => {
+            // Navbar editada dinamicamente
             navbarDin("<?php echo json_encode($isLogged); ?>","<?php echo $_SESSION['tipoDeUsuario']; ?>")
+
+            const inputCep = document.querySelector("#cep");
+            inputCep.onkeyup = () => buscaEndereco(inputCep.value);
+
+            const medCheckbox = document.getElementById("medCheckbox")
+            const apenasCheckboxMed = document.querySelectorAll(".apenasCheckboxMed")
+
+            // Exibindo os inputs apenas de médico dinamicamente
+            medCheckbox.addEventListener("change", (event) => {
+                if (medCheckbox.checked) {
+                    apenasCheckboxMed.forEach((item) => item.style.display = 'inline')
+                }else{
+                    apenasCheckboxMed.forEach((item) => item.style.display = 'none')
+                }
+            })
         }
     </script>
 </html>

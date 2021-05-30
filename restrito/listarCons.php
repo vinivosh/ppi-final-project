@@ -27,8 +27,10 @@ $isLogged = checkLogged($pdo);
     <header><h1 class="mb-0">Clinica dos Lolzeiros</h1>
       <?php echo navbar()?> <!-- Navbar completa -->
     </header>
-
+    
     <main>
+        <h2> Listagem de todas as consultas</h2>
+        
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -49,8 +51,8 @@ $isLogged = checkLogged($pdo);
                 SELECT ag.dataconsulta, ag.horario, ag.nome as NomePaciente, ag.sexo as SexoPaciente, ag.email as EmailPaciente,
                 p.nome as NomeMedico,m.especialidade as EspecialidadeMedico,m.crm
                 from TF_agenda ag
-                inner join TF_pessoa p on p.codigo=ag.codigomedico
-                inner join TF_medico m on m.codigo = ag.codigo
+                inner join TF_pessoa p on p.codigo = ag.codigomedico
+                inner join TF_medico m on m.codigo = ag.codigomedico
                 SQL;
 
                 $stmt = $pdo->query($sql);
@@ -64,6 +66,7 @@ $isLogged = checkLogged($pdo);
                     $EmailPaciente = htmlspecialchars($row['EmailPaciente']);
                     $NomeMedico = htmlspecialchars($row['NomeMedico']);
                     $EspecialidadeMedico = htmlspecialchars($row['EspecialidadeMedico']);
+                    $crm = htmlspecialchars($row['crm']);
                     
                     echo <<<HTML
                     <tr>

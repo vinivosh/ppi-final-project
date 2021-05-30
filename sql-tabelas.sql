@@ -8,7 +8,7 @@ CREATE TABLE TF_pessoa
    cep char(9),
    logradouro varchar(100),
    cidade varchar(100),
-   estado varchar(100)
+   estado char(3)
 ) ENGINE=InnoDB;
 
 CREATE TABLE TF_paciente

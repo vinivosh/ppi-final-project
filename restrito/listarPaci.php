@@ -14,7 +14,7 @@ $isLogged = checkLogged($pdo);
 <html lang="pt-br">
 <head>
     <meta charset ="UTF-8">
-    <title>Lista de Funcionários</title>
+    <title>Lista de Pacientes</title>
     <meta name="autor" content="Adib Cecilio Prado Domingos, Vinícius Henrique Almeida Praxedes e Yan Damasceno Dias">
     <meta name="description" content="description">
     <link rel="stylesheet" href="../mainStyle.css">
@@ -40,41 +40,36 @@ $isLogged = checkLogged($pdo);
                     <th>Logradouro</th>
                     <th>Cidade</th>
                     <th>Estado</th>
-                    <th>Data de Contrato</th>
-                    <th>Salário</th>
-                    <th>Especialidade</th>
-                    <th>CRM</th>
+                    <th>Peso</th>
+                    <th>Altura</th>
+                    <th>Tipo Sanguíneo</th>
                 </tr>
             </thead>
             <tbody>
 
                 <?php
                 $sql = <<<SQL
-                SELECT nome, sexo, email, telefone, cep, logradouro, cidade, estado, datacontrato, salario, especialidade, crm
-                FROM TF_pessoa PES
-                INNER JOIN TF_funcionario FUNC on FUNC.codigo = PES.codigo
-                LEFT JOIN TF_medico MED on MED.codigo = FUNC.codigo
+                SELECT nome, sexo, email, telefone, cep, logradouro, cidade, estado, peso, altura, tiposanguineo
+                FROM TF_pessoa PESS INNER JOIN TF_paciente PACI on PACI.codigo = PESS.codigo
                 SQL;
 
                 $stmt = $pdo->query($sql);
-                // $stmt->execute([$codigo]);
 
                 while ($row = $stmt->fetch()){
-                    // Tratando o email da tabela para evitar ataques XSS, já que é um campo produzido pelo usuário através do formulário
+                    // Tratando os dados que vieram de algum formulário que o usuário preencheu para evitar ataques XSS (não é necessário para os que vierakm de menus dropdown)
                     $nome = htmlspecialchars($row['nome']);
                     $email = htmlspecialchars($row['email']);
                     $telefone = htmlspecialchars($row['telefone']);
                     $cep = htmlspecialchars($row['cep']);
                     $logradouro = htmlspecialchars($row['logradouro']);
                     $cidade = htmlspecialchars($row['cidade']);
-                    $datacontrato = htmlspecialchars($row['datacontrato']);
-                    $salario = htmlspecialchars($row['salario']);
-                    $especialidade = htmlspecialchars($row['especialidade']);
-                    $crm = htmlspecialchars($row['crm']);
+                    $peso = htmlspecialchars($row['peso']);
+                    $altura = htmlspecialchars($row['altura']);
+                    $tiposanguineo = htmlspecialchars($row['tiposanguineo']);
 
                     echo <<<HTML
                     <tr>
-                        <td>$nome</td>
+                        <td>$nome</td>                            
                         <td>{$row['sexo']}</td>
                         <td>$email</td>
                         <td>$telefone</td>
@@ -82,10 +77,9 @@ $isLogged = checkLogged($pdo);
                         <td>$logradouro</td>
                         <td>$cidade</td>
                         <td>{$row['estado']}</td>
-                        <td>$datacontrato</td>
-                        <td>$salario</td>
-                        <td>$especialidade</td>
-                        <td>$crm</td>
+                        <td>$peso</td>
+                        <td>$altura</td>
+                        <td>$tiposanguineo</td>
                     </tr>
                     HTML;
                 }

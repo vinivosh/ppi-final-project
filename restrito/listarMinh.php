@@ -47,8 +47,8 @@ $emailLogado=  $_SESSION['emailUsuario'];
                 $sql = <<<SQL
                 SELECT ag.dataconsulta, ag.horario, ag.nome as NomePaciente, ag.sexo as SexoPaciente, ag.email as EmailPaciente
                 from TF_agenda ag
-                inner join TF_pessoa p on p.codigo=ag.codigomedico
-                inner join TF_medico m on m.codigo = ag.codigo
+                inner join TF_pessoa p on p.codigo = ag.codigomedico
+                inner join TF_medico m on m.codigo = ag.codigomedico
                 where p.email = ?
                 SQL;
 

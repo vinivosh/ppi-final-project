@@ -9,7 +9,7 @@
                     <li><a href="./index.php">Inicio</a></li>
                     <li><a href="./galeria.php">Galeria</a></li>
                     <li><a href="./cadastrarEndereco.php">Novo Endereço</a></li>
-                    <li><a href="./login.php">Login</a></li>
+                    <li class="apenasLoggedOff"><a href="./login.php">Login</a></li>
                     <li><a href="./agendarConsulta.php">Agendar Consulta</a></li><br>
 
                     <li class="apenasFunc"><a href="/restrito/cadastroFunc.php">Cadastrar Funcionários</a></li>

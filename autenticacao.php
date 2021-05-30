@@ -71,9 +71,8 @@ function checkPassword($pdo, $email, $senha)
 
 function checkLogged($pdo)
 {
-  // Verifica se as variáveis de sessão criadas
-  // no momento do login estão definidas
-  if (!isset($_SESSION['emailUsuario'], $_SESSION['loginString']))
+  // Verifica se as variáveis de sessão criadas no momento do login estão definidas
+  if ($_SESSION['emailUsuario'] == null || $_SESSION['emailUsuario'] == '' || $_SESSION['loginString'] == null || $_SESSION['loginString'] == '')
     return false;
 
   $email = $_SESSION['emailUsuario'];

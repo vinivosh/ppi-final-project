@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
 				  </svg>
 				Enviar</button></div>
-
+        </form>
         <div class="col-md-12 mt-3 alert alert-success" role="alert" id="cadastroSuccessMsg">
           Endereço adicionado com sucesso!
         </div>
@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>            
 		</div>	
 
-	</form>
+	
 	</div> 
 	
   </body>

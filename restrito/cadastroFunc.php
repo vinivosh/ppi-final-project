@@ -140,10 +140,15 @@ $isLogged = checkLogged($pdo);
                 </svg>
             </button>
             </div>
-
-            
-
         </form>
+
+        <div class="col-md-12 mt-3 alert alert-success" role="alert" id="cadastroSuccessMsg">
+        Endereço adicionado com sucesso!
+      </div>
+
+      <div class="col-md-12 mt-3 alert alert-danger" role="alert" id="cadastroFailMsg">
+        Erro no cadastro…
+      </div>    
     </main>
 
   </body>
@@ -206,6 +211,22 @@ $isLogged = checkLogged($pdo);
                     apenasCheckboxMed.forEach((item) => item.style.display = 'none')
                 }
             })
+
+            // Boxes de sucesso ou erro na insercao
+            const sucesso = '<?php echo $_GET["sucesso"] ?>'
+            const successoMsg = document.getElementById('cadastroSuccessMsg')
+            const failMsg = document.getElementById('cadastroFailMsg')
+
+             if (sucesso == 'true'){
+                successoMsg.style.display = 'block';
+                failMsg.style.display = 'none'
+              }else if (sucesso == 'false'){
+                successoMsg.style.display = 'none';
+                failMsg.style.display = 'block'
+              }else{
+                failMsg.style.display = 'none'
+                successoMsg.style.display = 'none';
+              }
         }
     </script>
 </html>

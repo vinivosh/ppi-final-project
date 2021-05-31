@@ -14,7 +14,7 @@ $isLogged = checkLogged($pdo);
 <html lang="pt-br">
 <head>
     <meta charset ="UTF-8">
-    <title>Cadastro de Funcionários</title>
+    <title>Cadastro de Pacientes</title>
     <meta name="autor" content="Adib Cecilio Prado Domingos, Vinícius Henrique Almeida Praxedes e Yan Damasceno Dias">
     <meta name="description" content="description">
     <link rel="stylesheet" href="../mainStyle.css">
@@ -29,8 +29,8 @@ $isLogged = checkLogged($pdo);
     </header>
 
     <main>
-    <h2>Cadastro de Funcionario</h2>
-        <form class="row g-2" action="processFunc.php" method="POST">
+    <h2>Cadastro de Paciente</h2>
+        <form class="row g-2" action="processPaci.php" method="POST">
             <!-- Nome -->
             <div class="col-md-9 form-floating">
                 <input type="text" class="form-control" placeholder="" id="nome" name="nome">
@@ -89,45 +89,29 @@ $isLogged = checkLogged($pdo);
             <label for="estado" class=""> Estado </label>
             </div>
 
-            <!-- Data de início do contrato -->
+            <!-- Peso -->
             <div class="col-md-4 form-floating">
-                <input type="date" class="form-control" placeholder="" name="dataContrato" id="dataContrato">
-                <label for="dataContrato"> Data de início do contrato </label>
+                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="peso" id="peso">
+                <label for="peso"> Peso </label>
             </div>
 
-            <!-- Salário -->
+            <!-- Altura -->
             <div class="col-md-4 form-floating">
-                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="salario" id="salario">
-                <label for="salario"> Salário </label>
+                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="altura" id="altura">
+                <label for="altura"> Altura </label>
             </div>
 
-            <!-- Senha -->
             <div class="col-md-4 form-floating">
-                <input type="password" class="form-control" placeholder="" name="senha" id="senha">
-                <label for="senha"> Senha </label>
+            <select type="text" class="form-select" placeholder="" name="tiposanguineo" id="tiposanguineo">
+                <option selected>——</option>
+                <option>A</option><option>A+</option><option>A-</option>
+                <option>B</option><option>B+</option><option>B-</option>
+                <option>AB</option><option>AB+</option><option>AB-</option>
+                <option>O</option><option>O+</option><option>O-</option>
+
+            </select>
+            <label for="tiposanguineo" class=""> Tipo Sanguineo </label>
             </div>
-
-            <!-- Checkbox de médico -->
-            <div class="col-md-12 form-floating">
-                <div class="form-check">
-                <input type="checkbox" class="form-check-input" placeholder="" id="medCheckbox">
-                <label for="medCheckbox"> Funcionário é um médico </label>
-                </div>
-            </div>
-
-            <!-- Partes que só aparecem se o usuário marcar que o funcionário é um médico -->
-
-            <!-- Especialidade -->
-            <div class="col-md-6 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" name="especialidade" id="especialidade">
-                <label for="especialidade"> Especialidade </label>
-            </div>
-
-            <!-- CRM -->
-            <div class="col-md-6 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" name="crm" id="crm">
-                <label for="crm"> CRM </label>
-            </div>            
 
             <!-- Botão cadastrar -->
             <div class="col-md-12 form-floating">
@@ -194,18 +178,6 @@ $isLogged = checkLogged($pdo);
 
             const inputCep = document.querySelector("#cep");
             inputCep.onkeyup = () => buscaEndereco(inputCep.value);
-
-            const medCheckbox = document.getElementById("medCheckbox")
-            const apenasCheckboxMed = document.querySelectorAll(".apenasCheckboxMed")
-
-            // Exibindo os inputs apenas de médico dinamicamente
-            medCheckbox.addEventListener("change", (event) => {
-                if (medCheckbox.checked) {
-                    apenasCheckboxMed.forEach((item) => item.style.display = 'inline')
-                }else{
-                    apenasCheckboxMed.forEach((item) => item.style.display = 'none')
-                }
-            })
         }
     </script>
 </html>

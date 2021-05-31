@@ -30,7 +30,7 @@ $emailLogado=  $_SESSION['emailUsuario'];
       <?php echo navbar()?> <!-- Navbar completa -->
     </header>
     <main>
-        <h1>Listagem de Minhas Consultas</h1>
+        <h2>Listagem de Minhas Consultas</h2>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>

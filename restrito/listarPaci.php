@@ -29,6 +29,7 @@ $isLogged = checkLogged($pdo);
     </header>
 
     <main>
+     <h2>Listar Todos Pacientes</h2>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>

@@ -65,13 +65,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<div class="container">
 		<form action="cadastrarEndereco.php" method="post">
 		<div class="row">
-			<div class="col-sm-4"><label for="cep" class="form-label">CEP</label><input type="text" class="form-control" id="cep" name="cep"></div>
-			<div class="col-sm-4"><label for="logradouro" class="form-label">Logradouro</label><input type="text" class="form-control" id="logradouro" name="logradouro"></div>
-			<div class="col-sm-6"><label for="cidade" class="form-label">Cidade</label><input type="text" class="form-control" id="cidade" name="cidade"></div>
+			<div class="col-sm-4"><label for="cep" class="form-label">CEP</label><input type="text" class="form-control" id="cep" name="cep" required pattern="[0-9]{5}-[0-9]{3}"></div>
+			<div class="col-sm-4"><label for="logradouro" class="form-label">Logradouro</label><input type="text" class="form-control" id="logradouro" name="logradouro" required></div>
+			<div class="col-sm-6"><label for="cidade" class="form-label">Cidade</label><input type="text" class="form-control" id="cidade" name="cidade" required></div>
 			<div class="col-sm-6">
         <label for="estado" class="form-label">Estado</label>
         <select id="estado" class="form-select" name="estado">
-          <option>AC</option><option>AL</option><option>AP</option>
+          <option selected>AC</option><option>AL</option><option>AP</option>
           <option>AM</option><option>BA</option><option>CE</option>
           <option>DF</option><option>ES</option><option>GO</option>
           <option>MA</option><option>MT</option><option>MS</option>
@@ -88,14 +88,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
 				  </svg>
 				Enviar</button></div>
-        </form>
-        <div class="col-md-12 mt-3 alert alert-success" role="alert" id="cadastroSuccessMsg">
-          Endereço adicionado com sucesso!
-        </div>
+      </form>
+      <div class="col-md-12 mt-3 alert alert-success" role="alert" id="cadastroSuccessMsg">
+        Endereço adicionado com sucesso!
+      </div>
 
-        <div class="col-md-12 mt-3 alert alert-danger" role="alert" id="cadastroFailMsg">
-          Erro no cadastro…
-        </div>            
+      <div class="col-md-12 mt-3 alert alert-danger" role="alert" id="cadastroFailMsg">
+        Erro no cadastro…
+      </div>            
 		</div>	
 
 	

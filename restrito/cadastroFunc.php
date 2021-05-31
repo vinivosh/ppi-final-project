@@ -30,53 +30,51 @@ $isLogged = checkLogged($pdo);
 
     <main>
     <h2>Cadastro de Funcionario</h2>
-        <form class="row g-2" action="processFunc.php" method="POST">
+    <form class="row g-2" action="processPaci.php" method="POST">
             <!-- Nome -->
             <div class="col-md-9 form-floating">
-                <input type="text" class="form-control" placeholder="" id="nome" name="nome">
+                <input type="text" class="form-control" placeholder="" id="nome" name="nome" required>
                 <label for="nome"> Nome </label>
             </div>
 
             <!-- Sexo -->
             <div class="col-md-3 form-floating">
             <select type="text" class="form-select" placeholder="" name="sexo" id="sexo">
-                <option selected>—</option>
-                <option value="M">Masculino</option><option value="F">Feminino</option>
+                <option selected value="M">Masculino</option><option value="F">Feminino</option>
             </select>
             <label for="sexo" class=""> Sexo </label>
             </div>
 
             <!-- E-mail -->
             <div class="col-md-12 form-floating">
-                <input type="email" class="form-control" placeholder="" name="email" id="inputEmail">
+                <input type="email" class="form-control" placeholder="" name="email" id="inputEmail" required>
                 <label for="inputEmail"> E-mail </label>
             </div>
 
             <!-- Telefone -->
             <div class="col-md-6 form-floating">
-                <input type="text" class="form-control" placeholder="" id="telefone" name="telefone">
+                <input type="text" class="form-control" placeholder="" id="telefone" name="telefone" required pattern="^\d{2}[ ]\d{5}-\d{4}$" >
                 <label for="telefone"> Telefone (formato xx xxxxx-xxxx) </label>
             </div>
 
             <!-- CEP -->
-            <div class="col-md-6 form-floating">
-                <input type="text" class="form-control" placeholder="" name="cep" id="cep">
+            <div class="col-md-6 form-floating">    
+                <input type="text" class="form-control" placeholder="" name="cep" id="cep" required pattern="[0-9]{5}-[0-9]{3}">
                 <label for="cep"> CEP (formato xxxxx-xxx)</label>
             </div>
 
             <!-- Logradouro, Cidade e Estado (select em um dropdown) -->
             <div class="col-md-12 form-floating">
-                <input type="text" class="form-control" placeholder="" name="logradouro" id="logradouro">
+                <input type="text" class="form-control" placeholder="" name="logradouro" id="logradouro" required>
                 <label for="logradouro"> Logradouro </label>
             </div>
             <div class="col-md-9 form-floating">
-                <input type="text" class="form-control" placeholder="" name="cidade" id="cidade">
+                <input type="text" class="form-control" placeholder="" name="cidade" id="cidade" required>
                 <label for="cidade"> Cidade </label>
             </div>
             <div class="col-md-3 form-floating">
             <select type="text" class="form-select" placeholder="" name="estado" id="estado">
-                <option selected>——</option>
-                <option>AC</option><option>AL</option><option>AP</option>
+                <option selected>AC</option><option>AL</option><option>AP</option>
                 <option>AM</option><option>BA</option><option>CE</option>
                 <option>DF</option><option>ES</option><option>GO</option>
                 <option>MA</option><option>MT</option><option>MS</option>
@@ -91,19 +89,19 @@ $isLogged = checkLogged($pdo);
 
             <!-- Data de início do contrato -->
             <div class="col-md-4 form-floating">
-                <input type="date" class="form-control" placeholder="" name="dataContrato" id="dataContrato">
+                <input type="date" class="form-control" placeholder="" name="dataContrato" id="dataContrato" required>
                 <label for="dataContrato"> Data de início do contrato </label>
             </div>
 
             <!-- Salário -->
             <div class="col-md-4 form-floating">
-                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="salario" id="salario">
+                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="salario" id="salario" required>
                 <label for="salario"> Salário </label>
             </div>
 
             <!-- Senha -->
             <div class="col-md-4 form-floating">
-                <input type="password" class="form-control" placeholder="" name="senha" id="senha">
+                <input type="password" class="form-control" placeholder="" name="senha" id="senha" required>
                 <label for="senha"> Senha </label>
             </div>
 
@@ -119,13 +117,13 @@ $isLogged = checkLogged($pdo);
 
             <!-- Especialidade -->
             <div class="col-md-6 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" name="especialidade" id="especialidade">
+                <input type="text" class="form-control" placeholder="" name="especialidade" id="especialidade" required>
                 <label for="especialidade"> Especialidade </label>
             </div>
 
             <!-- CRM -->
             <div class="col-md-6 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" name="crm" id="crm">
+                <input type="text" class="form-control" placeholder="" name="crm" id="crm" required>
                 <label for="crm"> CRM </label>
             </div>            
 

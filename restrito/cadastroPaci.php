@@ -33,50 +33,48 @@ $isLogged = checkLogged($pdo);
         <form class="row g-2" action="processPaci.php" method="POST">
             <!-- Nome -->
             <div class="col-md-9 form-floating">
-                <input type="text" class="form-control" placeholder="" id="nome" name="nome">
+                <input type="text" class="form-control" placeholder="" id="nome" name="nome" required>
                 <label for="nome"> Nome </label>
             </div>
 
             <!-- Sexo -->
             <div class="col-md-3 form-floating">
             <select type="text" class="form-select" placeholder="" name="sexo" id="sexo">
-                <option selected>—</option>
-                <option value="M">Masculino</option><option value="F">Feminino</option>
+                <option selected value="M">Masculino</option><option value="F">Feminino</option>
             </select>
             <label for="sexo" class=""> Sexo </label>
             </div>
 
             <!-- E-mail -->
             <div class="col-md-12 form-floating">
-                <input type="email" class="form-control" placeholder="" name="email" id="inputEmail">
+                <input type="email" class="form-control" placeholder="" name="email" id="inputEmail" required>
                 <label for="inputEmail"> E-mail </label>
             </div>
 
             <!-- Telefone -->
             <div class="col-md-6 form-floating">
-                <input type="text" class="form-control" placeholder="" id="telefone" name="telefone">
+                <input type="text" class="form-control" placeholder="" id="telefone" name="telefone" required pattern="^\d{2}[ ]\d{5}-\d{4}$" >
                 <label for="telefone"> Telefone (formato xx xxxxx-xxxx) </label>
             </div>
 
             <!-- CEP -->
-            <div class="col-md-6 form-floating">
-                <input type="text" class="form-control" placeholder="" name="cep" id="cep">
+            <div class="col-md-6 form-floating">    
+                <input type="text" class="form-control" placeholder="" name="cep" id="cep" required pattern="[0-9]{5}-[0-9]{3}">
                 <label for="cep"> CEP (formato xxxxx-xxx)</label>
             </div>
 
             <!-- Logradouro, Cidade e Estado (select em um dropdown) -->
             <div class="col-md-12 form-floating">
-                <input type="text" class="form-control" placeholder="" name="logradouro" id="logradouro">
+                <input type="text" class="form-control" placeholder="" name="logradouro" id="logradouro" required>
                 <label for="logradouro"> Logradouro </label>
             </div>
             <div class="col-md-9 form-floating">
-                <input type="text" class="form-control" placeholder="" name="cidade" id="cidade">
+                <input type="text" class="form-control" placeholder="" name="cidade" id="cidade" required>
                 <label for="cidade"> Cidade </label>
             </div>
             <div class="col-md-3 form-floating">
             <select type="text" class="form-select" placeholder="" name="estado" id="estado">
-                <option selected>——</option>
-                <option>AC</option><option>AL</option><option>AP</option>
+                <option selected>AC</option><option>AL</option><option>AP</option>
                 <option>AM</option><option>BA</option><option>CE</option>
                 <option>DF</option><option>ES</option><option>GO</option>
                 <option>MA</option><option>MT</option><option>MS</option>
@@ -91,20 +89,19 @@ $isLogged = checkLogged($pdo);
 
             <!-- Peso -->
             <div class="col-md-4 form-floating">
-                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="peso" id="peso">
+                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="peso" id="peso" required>
                 <label for="peso"> Peso </label>
             </div>
 
             <!-- Altura -->
             <div class="col-md-4 form-floating">
-                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="altura" id="altura">
+                <input type="number" step="any" pattern="^\d*(.\d{0,2})?$" class="form-control" placeholder="" name="altura" id="altura" required>
                 <label for="altura"> Altura </label>
             </div>
 
             <div class="col-md-4 form-floating">
             <select type="text" class="form-select" placeholder="" name="tiposanguineo" id="tiposanguineo">
-                <option selected>——</option>
-                <option>A</option><option>A+</option><option>A-</option>
+                <option selected>A</option><option>A+</option><option>A-</option>
                 <option>B</option><option>B+</option><option>B-</option>
                 <option>AB</option><option>AB+</option><option>AB-</option>
                 <option>O</option><option>O+</option><option>O-</option>

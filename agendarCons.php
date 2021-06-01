@@ -3,6 +3,7 @@
 require_once "conexaoMysql.php";
 require_once "autenticacao.php";
 require_once "scriptsAux/navbarHTML.php";
+require_once "scriptsAux/footerHTML.php";
 
 session_start();
 $pdo = mysqlConnect();
@@ -98,6 +99,8 @@ $isLogged = checkLogged($pdo);
         </form>
     </main>
 
+    <?php echo footer()?> <!-- footer completa -->
+
   </body>
 
   <script type="module">
@@ -135,6 +138,78 @@ $isLogged = checkLogged($pdo);
             }
 
             xhr.send()
+
+            const selEsp = document.getElementById('especialidade')
+            selEsp.addEventListener('change', (event) => {
+                // Adicionando médicos dinamicamente…
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', 'processConsReq.php?req=med&esp=' + event.target.value)
+                
+                xhr.onload = () =>{
+                    if (xhr.status == 200){ // Se bem sucedido…
+                        const selMed = document.getElementById('medico')
+
+                        // Primeiro removemos todos itens do select de médicos, se existirem
+                        while (selMed.firstElementChild){
+                            selMed.removeChild(selMed.lastElementChild)
+                        }
+                        
+                        // Obtemos os doutores do servidor…
+                        let response = JSON.parse(xhr.responseText)
+                        response.forEach(med => {
+                            let medico = document.createElement('option')
+                            medico.text = med.nome
+                            medico.value = med.codigo
+                            
+                            selMed.appendChild(medico)                            
+                        })
+                    }else{  // Se houve alguma falha…
+                        alert('Falha inesperada: ' + xhr.responseText)
+                    }
+                }
+
+                xhr.onError = () => {   // Se houver erro de rede…
+                    alert('Erro de rede')
+                }
+
+                xhr.send()
+            })
+
+            const selData = document.getElementById('dataConsulta')
+            selData.addEventListener('change', (event) => {
+                // Adicionando horários dinamicamente…
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', 'processConsReq.php?req=hora&data=' + event.target.value + '&med=' + document.getElementById('medico').value)
+                
+                xhr.onload = () =>{
+                    if (xhr.status == 200){ // Se bem sucedido…
+                        const selHora = document.getElementById('horaConsulta')
+
+                        // Primeiro removemos todos itens do select de horários, se existirem
+                        while (selHora.firstElementChild){
+                            selHora.removeChild(selHora.lastElementChild)
+                        }
+                        
+                        // Obtemos os horários do servidor…
+                        let response = JSON.parse(xhr.responseText)
+                        response.forEach(h => {
+                            let hora = document.createElement('option')
+                            hora.text = h
+                            hora.value = h
+                            
+                            selHora.appendChild(hora)                            
+                        })
+                    }else{  // Se houve alguma falha…
+                        alert('Falha inesperada: ' + xhr.responseText)
+                    }
+                }
+
+                xhr.onError = () => {   // Se houver erro de rede…
+                    alert('Erro de rede')
+                }
+
+                xhr.send()
+            })
         }
     </script>
 </html>

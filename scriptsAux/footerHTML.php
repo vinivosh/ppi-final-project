@@ -2,7 +2,7 @@
     function footer(){
     $retorno= <<<HTML
     <footer>
-            <h3>Endereço: Avenida das Palmeiras, 200 | Contato: +55 34 3200-3333 | Whatsapp: +55 34 99999-3333</h3>
+        <p class="p-0 m-0">Endereço: Avenida das Palmeiras, 200 | Contato: +55 34 3200-3333 | Whatsapp: +55 34 99999-3333</p>
     </footer>
     HTML;
     return $retorno;

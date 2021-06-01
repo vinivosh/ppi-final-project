@@ -29,13 +29,6 @@ $isLogged = checkLogged($pdo);
 			padding:10pt;
             border:1pt solid white;
 		}
-        main{		 
-        text-align: center;border:1pt solid; padding: 1pt;border-color: white;
-         position: absolute;
-		 left:50%;
-		 transform: translate(-50%,0%);
-         border-radius: 15pt; 
-
 </style> 
 </head>
 
@@ -47,26 +40,24 @@ $isLogged = checkLogged($pdo);
         <h2> Galeria de Fotos</h2>
         <hr>
         <div>
-        <table>
-            <tr>
-                <td><img src="images/canada1.jpg" alt="canada1" width="300" height="200"></td>
-                <td><img src="images/canada2.jpg" alt="canada1" width="300" height="200"></td>
-            </tr>
-            <tr>
-                <td><img src="images/canada3.jpg" alt="canada1" width="300" height="200"></td>
-                <td><img src="images/canada4.jpg" alt="canada1" width="300" height="200"></td>
-            </tr>
-            <tr>
-                <td><img src="images/canada5.jpg" alt="canada1" width="300" height="200"></td>
-                <td><img src="images/canada6.jpg" alt="canada1" width="300" height="200"></td>
-            </tr>
-        </table>    
-        <hr>
-        <div class="mapa">
-            <iframe width="500" height="500"
-                src="https://maps.google.com/?q=49.277428703380835,-123.10399289313456&output=svembed"
-                allowfullscreen>  </iframe>
-            </div>
+            <table>
+                <tr>
+                    <td><img src="images/clinica1.jpeg" alt="clinica1" width="300" height="200"></td>
+                    <td><img src="images/clinica2.jpeg" alt="clinica2" width="300" height="200"></td>
+                </tr>
+                <tr>
+                    <td><img src="images/clinica3.jpeg" alt="clinica3" width="300" height="200"></td>
+                    <td><img src="images/clinica4.jpeg" alt="clinica4" width="300" height="200"></td>
+                </tr>
+                <tr>
+                    <td><img src="images/clinica5.jpeg" alt="clinica5" width="300" height="200"></td>
+                    <td><img src="images/clinica6.jpeg" alt="clinica6" width="300" height="200"></td>
+                </tr>
+            </table>    
+            <hr>
+            <!-- <div class="mapa">
+                <iframe width="500" height="500" src="https://maps.google.com/?q=49.277428703380835,-123.10399289313456&output=svembed" allowfullscreen>
+            </div> -->
         </div>
 </main>
     <?php echo footer()?> <!-- footer completa -->

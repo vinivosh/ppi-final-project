@@ -3,6 +3,8 @@
 require_once "conexaoMysql.php";
 require_once "autenticacao.php";
 require_once "scriptsAux/navbarHTML.php";
+require_once "scriptsAux/footerHTML.php";
+
 session_start();
 $pdo = mysqlConnect();
 $isLogged = checkLogged($pdo);
@@ -49,9 +51,11 @@ $isLogged = checkLogged($pdo);
             </article>
             
             <hr>
-            <img src="images/clinicalol.jpg" alt="canada1" width="900" height="500" class="center">
+            <img src="images/clinicalol.jpg" alt="clinicalol" width="900" height="500" class="center">
         </div>
     </main> 
+<?php echo footer()?> <!-- footer completa -->
+    
 
     <script type="module">
          console.log("entrou no js")

@@ -3,6 +3,7 @@
 require_once "../conexaoMysql.php";
 require_once "../autenticacao.php";
 require_once "../scriptsAux/navbarHTML.php";
+require_once "../scriptsAux/footerHTML.php";
 
 session_start();
 $pdo = mysqlConnect();
@@ -77,7 +78,7 @@ $emailLogado=  $_SESSION['emailUsuario'];
             </tbody>
         </table>
     </main>
-
+    <?php echo footer()?> <!-- footer completa -->
   </body>
 
   <script type="module">

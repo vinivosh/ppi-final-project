@@ -3,6 +3,8 @@
 require_once "conexaoMysql.php";
 require_once "autenticacao.php";
 require_once "scriptsAux/navbarHTML.php";
+require_once "scriptsAux/footerHTML.php";
+
 session_start();
 $pdo = mysqlConnect();
 $isLogged = checkLogged($pdo);
@@ -15,7 +17,9 @@ $isLogged = checkLogged($pdo);
     <title> Galeria</title>
     <meta name="description" content="Adib Cecilio Prado Domingos e o autor">
     <link rel="stylesheet" href="mainStyle.css">
-     <!-- <style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+     <style>
 
         table{ margin-left: auto;  margin-right: auto;}
         img{
@@ -32,14 +36,14 @@ $isLogged = checkLogged($pdo);
 		 transform: translate(-50%,0%);
          border-radius: 15pt; 
 
-</style>  -->
+</style> 
 </head>
 
 <body>
-    <header><h1>Site do Adib</h1>
+    <header><h1 class="mb-0">Clinica dos Lolzeiros</h1>
         <?php echo navbar()?> <!-- Navbar completa -->
     </header>
-    <main>
+<main>
         <h2> Galeria de Fotos</h2>
         <hr>
         <div>
@@ -64,7 +68,8 @@ $isLogged = checkLogged($pdo);
                 allowfullscreen>  </iframe>
             </div>
         </div>
-    </main>
+</main>
+    <?php echo footer()?> <!-- footer completa -->
 
     <script type="module">
          console.log("entrou no js")

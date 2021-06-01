@@ -3,6 +3,7 @@
 require_once "../conexaoMysql.php";
 require_once "../autenticacao.php";
 require_once "../scriptsAux/navbarHTML.php";
+require_once "../scriptsAux/footerHTML.php";
 
 session_start();
 $pdo = mysqlConnect();
@@ -30,7 +31,7 @@ $isLogged = checkLogged($pdo);
 
     <main>
     <h2>Cadastro de Funcionario</h2>
-    <form class="row g-2" action="processPaci.php" method="POST">
+    <form class="row g-2" action="processFunc.php" method="POST">
             <!-- Nome -->
             <div class="col-md-9 form-floating">
                 <input type="text" class="form-control" placeholder="" id="nome" name="nome" required>
@@ -117,13 +118,13 @@ $isLogged = checkLogged($pdo);
 
             <!-- Especialidade -->
             <div class="col-md-6 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" name="especialidade" id="especialidade" required>
+                <input type="text" class="form-control" placeholder="" name="especialidade" id="especialidade">
                 <label for="especialidade"> Especialidade </label>
             </div>
 
             <!-- CRM -->
             <div class="col-md-6 form-floating apenasCheckboxMed">
-                <input type="text" class="form-control" placeholder="" name="crm" id="crm" required>
+                <input type="text" class="form-control" placeholder="" name="crm" id="crm">
                 <label for="crm"> CRM </label>
             </div>            
 
@@ -148,7 +149,7 @@ $isLogged = checkLogged($pdo);
         Erro no cadastro…
       </div>    
     </main>
-
+    <?php echo footer()?> <!-- footer completa -->
   </body>
 
   <script type="module">

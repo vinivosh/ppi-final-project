@@ -29,10 +29,12 @@ body {
     text-align: left;
     background-color:rgb(123, 134, 123) !important;
     font-size: 16pt !important;
+    min-height: 100%;
 }   
 
 main{
     position: relative;
+    width: 70%;
     left:50%;
     transform: translate(-50%,0%);
 }

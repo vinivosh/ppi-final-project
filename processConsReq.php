@@ -59,19 +59,18 @@ if($req == 'esp'){ // Se o pedido for as especialidades…
 
     try {
         $stmt = $pdo->query($sql);
-        $response = ['8:00:00','9:00:00','10:00:00','11:00:00','12:00:00','13:00:00','14:00:00','15:00:00','16:00:00','17:00:00'];
 
-        while($row = $stmt->fetchColumn()){
-            echo 'fora do if! ';
-            // if (in_array($row, $response)){
-                // echo 'entrou no if! ';
-                // remove_element($response, $row);
-            $response = array_diff($response, array($row));
-            // }
-            // echo 'row = ' . json_encode($row) . ' ' . json_encode($response);
+        // A array com os horários disponíveis começa com todos os do funcionamento da clínica
+        $response = ['08:00:00','09:00:00','10:00:00','11:00:00','12:00:00','13:00:00','14:00:00','15:00:00','16:00:00','17:00:00'];
+
+        $row = $stmt->fetchColumn();
+        while($row){
+            // Agora cada horário já na agenda do médico é retirado da array de horários disponíveis
+            $response = array_diff($response, array($row));            
+            $row = $stmt->fetchColumn();
         }
-        
-        echo 'row = ' . $row . ' response = ' . json_encode($response);
+
+        echo json_encode($response);
 
     } catch (Exception $e) {
         echo json_encode(null);

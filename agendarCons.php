@@ -192,7 +192,9 @@ $isLogged = checkLogged($pdo);
                         
                         // Obtemos os horários do servidor…
                         let response = JSON.parse(xhr.responseText)
-                        response.forEach(h => {
+                        // Por algum motivo só aqui a resposta está vindo num objeto, ao invés de array. Então temos que usar Object.values(response) para extrair só os valores de response e usá-los
+                        console.log(Object.values(response) + '\n')
+                        Object.values(response).forEach(h => {
                             let hora = document.createElement('option')
                             hora.text = h
                             hora.value = h

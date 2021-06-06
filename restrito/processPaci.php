@@ -29,34 +29,34 @@ VALUES (?,?,?,?)
 SQL;
 
 try {
-    $pdo->beginTransaction();
+  $pdo->beginTransaction();
 
-    $stmtp = $pdo->prepare($sqlpessoa);
-    if (!$stmtp->execute([
-      $nome,$sexo,$email,$telefone,
-      $cep,$logradouro,$cidade,$estado
-    ])) throw new Exception('Falha na inserção de pessoa');
+  $stmtp = $pdo->prepare($sqlpessoa);
+  if (!$stmtp->execute([
+    $nome,$sexo,$email,$telefone,
+    $cep,$logradouro,$cidade,$estado
+  ])) throw new Exception('Falha na inserção de pessoa');
   
-    $codigopessoa = $pdo->lastInsertId();
-    
-    $stmtpac = $pdo->prepare($sqlpac);
-    if (!$stmtpac->execute([
-      $codigopessoa, $peso, $altura, $tiposanguineo
-    ])) throw new Exception('Falha na inserção de paciente');
-    
-    $pdo->commit();
+  $codigopessoa = $pdo->lastInsertId();
   
-    header("Location: cadastroPaci.php?sucesso=true");
-    exit();
+  $stmtpac = $pdo->prepare($sqlpac);
+  if (!$stmtpac->execute([
+    $codigopessoa, $peso, $altura, $tiposanguineo
+  ])) throw new Exception('Falha na inserção de paciente');
+  
+  $pdo->commit();
+  
+  header("Location: cadastroPaci.php?sucesso=true");
+  exit();
   } 
   catch (Exception $e) {
-    $pdo->rollBack();
-    if ($e->errorInfo[1] === 1062){
-      header("Location: cadastroPaci.php?sucesso=false");
-      exit('Dados duplicados: ' . $e->getMessage());}
-    else{
-      header("Location: cadastroPaci.php?sucesso=false");
-      exit('Falha ao cadastrar os dados: ' . $e->getMessage());}
+  $pdo->rollBack();
+  if ($e->errorInfo[1] === 1062){
+    header("Location: cadastroPaci.php?sucesso=false");
+    exit('Dados duplicados: ' . $e->getMessage());}
+  else{
+    header("Location: cadastroPaci.php?sucesso=false");
+    exit('Falha ao cadastrar os dados: ' . $e->getMessage());}
   }
 
 ?>

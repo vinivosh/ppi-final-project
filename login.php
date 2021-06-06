@@ -21,45 +21,40 @@ require_once "scriptsAux/navbarHTML.php";
     <header><h1>Clinica dos Lolzeiros</h1>
       <?php echo navbar()?> <!-- Navbar completa -->
     </header>
-    <div class="container my-3">
 
-        <main>
-            <form class="row g-3" action="">
+    <main class="container">
+      <form class="row g-3 centerBox">
+        <div>
+          <!-- E-mail e senha -->
+          <div class="col-md-12 mb-2 form-floating">
+            <input type="email" class="form-control" placeholder="" id="inputEmail" name="inputEmail">
+            <label for="inputEmail"> E-mail </label>
+          </div>
+          <div class="col-md-12 form-floating">
+            <input type="password" class="form-control" placeholder="" id="inputSenha" name="inputSenha">
+            <label for="inputSenha"> Senha </label>
+          </div>
 
-                <div class="centerBox">
-                    <!-- E-mail e senha -->
-                    <div class="col-md-12 form-floating">
-                        <input type="email" class="form-control" placeholder="" id="inputEmail" name="inputEmail">
-                        <label for="inputEmail"> E-mail </label>
-                    </div>
-                    <div class="col-md-12 form-floating">
-                        <input type="password" class="form-control" placeholder="" id="inputSenha" name="inputSenha">
-                        <label for="inputSenha"> Senha </label>
-                    </div>
+          <!-- Botão Entrar -->
+          <div class="col-md-12 mt-3">
+            <button type="submit" class="btn btn-primary" id="signUpBtn">
+                Entrar
+                <!-- Ícone da pessoa + -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+            </button>
+          </div>
+        </div>
 
-                    <!-- Botão Entrar -->
-                    <div class="col-md-12 mt-3">
-                    <button type="submit" class="btn btn-primary" id="signUpBtn">
-                        Entrar
-                        <!-- Ícone da pessoa + -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg>
-                    </button>
-                    </div>
-                </div>
+        <div class="col-md-12 mt-3 alert alert-danger" role="alert" id="loginFailMsg">
+          Falha no login!<br>
+          E-mail e/ou senha estão incorretos.
+        </div>
 
-               
+      </form>
+    </main>
 
-                <div class="col-md-12 mt-3 alert alert-danger" role="alert" id="loginFailMsg">
-                  Falha no login!<br>
-                  E-mail e/ou senha estão incorretos.
-                </div>
-
-            </form>
-        </main>
-        
-    </div>
 
     <script type="module">
       import {navbarDin} from "./scriptsAux/navbarDinamica.js"

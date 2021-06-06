@@ -36,44 +36,44 @@ VALUES (?,?,?)
 SQL;
 
 try {
-    $pdo->beginTransaction();
+  $pdo->beginTransaction();
 
-    $stmtp = $pdo->prepare($sqlpessoa);
-    if (!$stmtp->execute([
-      $nome,$sexo,$email,$telefone,
-      $cep,$logradouro,$cidade,$estado
-    ])) throw new Exception('Falha na inserção de pessoa');
+  $stmtp = $pdo->prepare($sqlpessoa);
+  if (!$stmtp->execute([
+    $nome,$sexo,$email,$telefone,
+    $cep,$logradouro,$cidade,$estado
+  ])) throw new Exception('Falha na inserção de pessoa');
   
-    $codigopessoa = $pdo->lastInsertId();
-    
-    $stmtf = $pdo->prepare($sqlfunc);
-    if (!$stmtf->execute([
-      $codigopessoa, $dataContrato, $salario, $senhahash
-    ])) throw new Exception('Falha na inserção de funcionário');
-    
-    $stmtm = $pdo->prepare($sqlmed);
-    if($crm != NULL && $crm != '') {
-        if (!$stmtm->execute([
-            $codigopessoa, $especialidade, $crm
-          ])) throw new Exception('Falha na inserção de médico');
-          
-    }
-    $pdo->commit();
-    
-    header("Location: cadastroFunc.php?sucesso=true");
-    exit();
+  $codigopessoa = $pdo->lastInsertId();
+  
+  $stmtf = $pdo->prepare($sqlfunc);
+  if (!$stmtf->execute([
+    $codigopessoa, $dataContrato, $salario, $senhahash
+  ])) throw new Exception('Falha na inserção de funcionário');
+  
+  $stmtm = $pdo->prepare($sqlmed);
+  if($crm != NULL && $crm != '') {
+    if (!$stmtm->execute([
+      $codigopessoa, $especialidade, $crm
+      ])) throw new Exception('Falha na inserção de médico');
+      
+  }
+  $pdo->commit();
+  
+  header("Location: cadastroFunc.php?sucesso=true");
+  exit();
   } 
   catch (Exception $e) {
-    $pdo->rollBack();
-    if ($e->errorInfo[1] === 1062){
-      header("Location: cadastroFunc.php?sucesso=false");
-      exit('Dados duplicados: ' . $e->getMessage());
-    }
+  $pdo->rollBack();
+  if ($e->errorInfo[1] === 1062){
+    header("Location: cadastroFunc.php?sucesso=false");
+    exit('Dados duplicados: ' . $e->getMessage());
+  }
 
-    else{
-      header("Location: cadastroFunc.php?sucesso=false");
-      exit('Falha ao cadastrar os dados: ' . $e->getMessage());
-    }
+  else{
+    header("Location: cadastroFunc.php?sucesso=false");
+    exit('Falha ao cadastrar os dados: ' . $e->getMessage());
+  }
   }
 
 ?>

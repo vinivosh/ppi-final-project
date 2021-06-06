@@ -14,8 +14,8 @@ CREATE TABLE TF_pessoa
 CREATE TABLE TF_paciente
 (
    codigo int UNIQUE,
-   peso decimal,
-   altura decimal,
+   peso decimal(6,2),
+   altura int,
    tiposanguineo varchar(3),
    FOREIGN KEY (codigo) REFERENCES TF_pessoa(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -25,7 +25,7 @@ CREATE TABLE TF_funcionario
 (
    codigo int UNIQUE,
    datacontrato date,
-   salario decimal,
+   salario decimal(10,2),
    hash_senha varchar(255),
    FOREIGN KEY (codigo) REFERENCES TF_pessoa(codigo) ON DELETE CASCADE
 ) ENGINE=InnoDB;

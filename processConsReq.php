@@ -49,7 +49,7 @@ if($req == 'esp'){ // Se o pedido for as especialidades…
     } catch (Exception $e) {
         echo json_encode(null);
     }
-}else if($req='hora'){
+}else if($req == 'hora'){
     // Seleciona os horários disponíveis do médico selecionado
     $sql = <<<SQL
     SELECT horario
